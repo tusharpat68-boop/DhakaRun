@@ -1,6 +1,12 @@
-# ঢাকা রান (Dhaka Run)
+# RAN BD
 
-ঢাকার রাস্তায় ৩ লেনের এন্ডলেস রানার। Kotlin + Jetpack Compose, কোনো ছবি বা সাউন্ড ফাইল ছাড়া (সব কোডে আঁকা)।
+বাংলাদেশের রাস্তায় ৩ লেনের এন্ডলেস রানার (আগের নাম: ঢাকা রান)। Kotlin + Jetpack Compose। গেমের দৃশ্য কোডে আঁকা, শুধু অফিসিয়াল RAN BD লোগো ছবি হিসেবে আছে।
+
+## ব্র্যান্ডিং (Phase 2)
+- অ্যাপের নাম: RAN BD (`app/src/main/res/values/strings.xml`)
+- লোগো (অ্যাপের ভেতরে): `app/src/main/res/drawable-nodpi/ranbd_logo.webp`, স্প্ল্যাশ, মেনু, বিরতি ও গেম ওভারে ব্যবহার হয়
+- লঞ্চার আইকন: `mipmap-*/ic_launcher*.png` (পুরোনো ফোন) ও `mipmap-anydpi-v26/` (অ্যাডাপটিভ আইকন)
+- প্যাকেজ/অ্যাপ আইডি অপরিবর্তিত: `com.dhakarun.game` (আগের সেভ ডেটা ঠিক থাকে)
 
 ## কীভাবে খেলবেন
 - বাঁ/ডানে সোয়াইপ: লেন বদল
@@ -24,7 +30,7 @@
 ### ১) GitHub Actions (ফোন থেকে, কম্পিউটার ছাড়া)
 1. প্রজেক্টটা একটা GitHub রিপোতে পুশ করুন (`main` ব্রাঞ্চ)
 2. রিপোর Actions ট্যাবে "Build APK" চলবে (বা Run workflow চাপুন)
-3. শেষ হলে Artifacts থেকে `DhakaRun-debug-apk` নামিয়ে ইনস্টল করুন
+3. শেষ হলে Artifacts থেকে `RanBD-debug-apk` নামিয়ে ইনস্টল করুন
 
 ### ২) Termux / কম্পিউটারে
 ```

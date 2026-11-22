@@ -5,6 +5,8 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -28,7 +30,14 @@ class MainActivity : ComponentActivity() {
         val app = AppState(store, sfx)
 
         setContent {
-            MaterialTheme {
+            MaterialTheme(
+                colorScheme = darkColorScheme(
+                    primary = Color(0xFFE53935),
+                    onPrimary = Color.White,
+                    secondary = Color(0xFF43A047),
+                    onSecondary = Color.White
+                )
+            ) {
                 Root(app)
             }
         }

@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "DhakaRun"
+rootProject.name = "RanBD"
 include(":app")

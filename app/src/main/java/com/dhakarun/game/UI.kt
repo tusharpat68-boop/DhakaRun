@@ -1,6 +1,15 @@
 package com.dhakarun.game
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.delay
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -50,7 +59,7 @@ class RunSummary(
 )
 
 class AppState(val store: Store, val sfx: Sfx) {
-    var screen by mutableStateOf("menu")
+    var screen by mutableStateOf("splash")
     var rev by mutableIntStateOf(0)
     var runId by mutableIntStateOf(0)
 
@@ -94,11 +103,41 @@ private val bgBrush = Brush.verticalGradient(listOf(Color(0xFF0D47A1), Color(0xF
 @Composable
 fun Root(app: AppState) {
     when (app.screen) {
+        "splash" -> SplashScreen(app)
         "shop" -> ShopScreen(app)
         "game" -> GameScreen(app)
         else -> MenuScreen(app)
     }
     BackHandler(enabled = app.screen == "shop") { app.screen = "menu" }
+}
+
+// ======================= স্প্ল্যাশ =======================
+@Composable
+fun SplashScreen(app: AppState) {
+    val progress = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+        progress.animateTo(1f, tween(800))
+        delay(1000)
+        if (app.screen == "splash") app.screen = "menu"
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF071A33))
+            .pointerInput(Unit) { detectTapGestures { app.screen = "menu" } },
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(R.drawable.ranbd_logo),
+            contentDescription = "RAN BD",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .aspectRatio(1f)
+                .alpha(progress.value)
+                .scale(0.85f + 0.15f * progress.value)
+        )
+    }
 }
 
 // ======================= মেনু =======================
@@ -115,8 +154,14 @@ fun MenuScreen(app: AppState) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(24.dp))
-        Text("ঢাকা রান", color = Color.White, fontSize = 48.sp, fontWeight = FontWeight.Bold)
-        Text("Dhaka Run", color = Color(0xFFFFE082), fontSize = 18.sp)
+        Image(
+            painter = painterResource(R.drawable.ranbd_logo),
+            contentDescription = "RAN BD",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .fillMaxWidth(0.72f)
+                .aspectRatio(1f)
+        )
         Spacer(Modifier.height(20.dp))
 
         Row(
@@ -469,6 +514,15 @@ private fun Overlay(content: @Composable () -> Unit) {
                 .padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(R.drawable.ranbd_logo),
+                contentDescription = "RAN BD",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .size(96.dp)
+                    .aspectRatio(1f)
+            )
+            Spacer(Modifier.height(12.dp))
             content()
         }
     }
